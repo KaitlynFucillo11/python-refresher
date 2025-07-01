@@ -1,0 +1,51 @@
+class BankAccount:
+    def __init__(self, name, account_number, initial_balance=0):
+        self.name = name
+        self.account_number = account_number
+        self.balance = initial_balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited ${amount:.2f} into account {self.account_number}.")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if amount <= 0:
+            print("Withdrawal amount must be positive.")
+        elif amount > self.balance:
+            print("Insufficient funds.")
+        else:
+            self.balance -= amount
+            print(f"Withdrew ${amount:.2f} from account {self.account_number}.")
+
+    def print_balance(self):
+        print(f"\nAccount Holder: {self.name}")
+        print(f"Account Number: {self.account_number}")
+        print(f"Current Balance: ${self.balance:.2f}\n")
+
+
+# Create an account
+account = BankAccount("Kaitlyn Fucillo", "123456789", 1000)
+
+# Interactive loop
+while True:
+    account.print_balance()
+    action = input("Would you like to 'deposit', 'withdraw', or 'exit'? ").lower()
+
+    if action == "deposit":
+        amount = float(input("Enter the amount to deposit: $"))
+        account.deposit(amount)
+
+    elif action == "withdraw":
+        amount = float(input("Enter the amount to withdraw: $"))
+        account.withdraw(amount)
+
+    elif action == "exit":
+        print("Thank you for using the bank account simulator.")
+        account.print_balance()
+        break
+
+    else:
+        print("Invalid option. Please choose 'deposit', 'withdraw', or 'exit'.")
